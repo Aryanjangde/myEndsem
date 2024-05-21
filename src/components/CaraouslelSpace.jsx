@@ -32,7 +32,7 @@ function CardDashboard({ _id, thumbnail, keywords }) {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           className={`relative rounded-xl flex-col justify-center items-center transition-all duration-300 ease-in-out p-4 shadow-lg transform ${
-            isHovered ? "bg-violet-400 text-black scale-105 z-50" : "bg-black text-white scale-100"
+            isHovered ? "bg-violet-400 text-black scale-105 z-50 rounded-full" : "bg-black text-white scale-100"
           }`}
           style={{ transition: "all 0.3s ease-in-out" }}
         >

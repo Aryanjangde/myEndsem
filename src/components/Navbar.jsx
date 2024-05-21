@@ -61,7 +61,7 @@ export default function Navbar() {
         {localStorage.getItem("user") ? (<button className="text-black mr-10 bg-white rounded-xl p-3" onClick={()=>{
           localStorage.removeItem("user");
           nav("/login");
-        }}>Sign Out</button>) : (<button className="text-black mr-10 bg-white rounded-xl p-3" onClick={()=>{
+        }}>Sign Out</button>) : (<button className="text-black mr-10 bg-white rounded-xl p-3 pl-8 pr-8" onClick={()=>{
           nav("/login");
         }
         }>Log In</button>)}
