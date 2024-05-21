@@ -44,44 +44,48 @@ export default  function Login(){
   }
 
 
-  return(
 
-        <div className="h-screen flex  flex-col items-center justify-center gap-14	bg-black">
-        <div className="flex  flex-col items-center justify-center gap-2">
-          <div>
-            <input
-              className="ring-black"
-              type="email"
-              placeholder="Email"
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              placeholder="Password"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-          </div>
-          <div>
-            <button
-              className=" hue-rotate-180 drop-shadow-2xl cursor-wait text-lg text-white"
-              onClick={handleLogin}
-            >
-              Login
-            </button>
-            <br></br>
-            <Link to="/signup"className="text-white	">
+
+    return (
+      <div className="h-screen flex flex-col items-center justify-center gap-14 bg-black">
+        <div className="bg-violet-700 shadow-md rounded-2xl p-8 w-3/10 mb-32">
+          <div className="flex flex-col items-center justify-center gap-5">
+            <div>
+              <input
+                className="border-2 border-customPurple rounded-xl w-full py-2 px-3 mb-3"
+                type="email"
+                placeholder="Email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <input
+                className="border-2 border-customPurple rounded-xl w-full py-2 px-3 mb-3"
+                type="password"
+                placeholder="Password"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <button
+                className="hue-rotate-180 drop-shadow-2xl text-lg text-white"
+                onClick={handleLogin}
+              >
+                Login
+              </button>
+              <br />
+              <Link to="/signup" className="text-white">
                 Create Account
-            </Link>
+              </Link>
+            </div>
           </div>
         </div>
+      </div>
+    );
     
-    
-        </div>
-  )
+  
 }

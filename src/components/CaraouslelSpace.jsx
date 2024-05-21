@@ -1,15 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { ApiContext } from "./contextFolder/Context";
 import { Carousel } from "primereact/carousel";
-
+import { useNavigate } from "react-router-dom";
 
 
 function CardDashboard({ _id, thumbnail, keywords }) {
     const [isHovered, setIsHovered] = useState(false);
     const [video, setVideo] = useState(null);
+    const nav = useNavigate();
 
     function handleVideo(){
-        fetch(`https://academics.newtonschool.co/api/v1/ottx/show/${_id}`,{
+        if(localStorage.getItem("user")){
+            fetch(`https://academics.newtonschool.co/api/v1/ottx/show/${_id}`,{
             method:"GET",
             headers:{
                 "accept":"application/json",
@@ -18,15 +20,15 @@ function CardDashboard({ _id, thumbnail, keywords }) {
             }
         }).then((res)=> res.json())
         .then((data)=>{
-            setVideo(data.video_url);
+            console.log(data.data.video_url)
+            setVideo(data.data.video_url);
         })
-
+        }
+        else{
+            nav("/login")
+        }
+        
     }
-
-       
-
-
-
     return (
       <div onMouseEnter={()=>setIsHovered(true)} onMouseLeave={()=>setIsHovered(false)} className={`${isHovered ? "bg-white rounded-xl" : "bg-black rounded-xl"} flex-col justify-center items-center`}>
             <div className="self-center rounded-xl ">
@@ -51,6 +53,7 @@ export default function CarouselSpace() {
   const [curr, setCurr] = useState("movie");
   const value = useContext(ApiContext);
   const [hoveredId, setHoveredId] = useState(null);
+
 
   useEffect(() => {
     async function fetchCategoryList() {
@@ -81,9 +84,17 @@ export default function CarouselSpace() {
       CategoryWise[item] = List;
     });
   }
-//   console.log(value.data);
+  console.log(value.data);
 
-  
+    const options = [
+        'movie',
+        'tv show',
+        'web series',
+        'documentary',
+        'short film',
+        'video song',
+        'trailer',
+      ];
 
   return (
     <div className="flex-col text-white mt-16 p-14">
@@ -99,10 +110,19 @@ export default function CarouselSpace() {
           itemTemplate={CardDashboard}
         />
       </div>
+      <div className="flex justify-end">
+        <select onChange={(e)=>{console.log(e.target.value, 'arst');setCurr(e.target.value)}}>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+        </select>
+      </div>
       <div>
-        <div>{curr}</div>
+        <div className="text-5xl">{curr}</div>
         <Carousel
-          value={CategoryWise.movie || []}
+          value={CategoryWise[curr] || []}
           numVisible={5}
           numScroll={2}
           className="custom-carousel"
