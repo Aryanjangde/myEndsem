@@ -28,7 +28,7 @@ export default  function Signup(){
     })
     .then((response) => {
       console.log(response.data); // Handle the response data here
-      localStorage.setItem("token", response.data.token)
+      
       alert("User Created");
       isSignedIn.setIsSignedIn(true);
       toLogin("/login")

@@ -22,7 +22,7 @@ export const ContextProvider = (props)=>{
     fetchData();
   }, []); // Empty dependency array means this effect runs once after the initial render
     
-    console.log(data)
+    
 
     return (
         <ApiContext.Provider value={{data, isSignedIn, setIsSignedIn}}>

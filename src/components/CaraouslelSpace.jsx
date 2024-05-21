@@ -3,8 +3,30 @@ import { ApiContext } from "./contextFolder/Context";
 import { Carousel } from "primereact/carousel";
 
 
-function CardDashboard({ id, thumbnail, keywords }) {
+
+function CardDashboard({ _id, thumbnail, keywords }) {
     const [isHovered, setIsHovered] = useState(false);
+    const [video, setVideo] = useState(null);
+
+    function handleVideo(){
+        fetch(`https://academics.newtonschool.co/api/v1/ottx/show/${_id}`,{
+            method:"GET",
+            headers:{
+                "accept":"application/json",
+                "projectID":"treoo5dhf86s",
+                "Authorization": `Bearer ${localStorage.getItem("user")}`
+            }
+        }).then((res)=> res.json())
+        .then((data)=>{
+            setVideo(data.video_url);
+        })
+
+    }
+
+       
+
+
+
     return (
       <div onMouseEnter={()=>setIsHovered(true)} onMouseLeave={()=>setIsHovered(false)} className={`${isHovered ? "bg-white rounded-xl" : "bg-black rounded-xl"} flex-col justify-center items-center`}>
             <div className="self-center rounded-xl ">
@@ -16,7 +38,7 @@ function CardDashboard({ id, thumbnail, keywords }) {
               ))}
             </div>
             {isHovered && 
-            <button className="p-3 bg-white text-black rounded-2xl pl-5 pr-5 border-2 ml-4 mb-4">
+            <button className="p-3 bg-white text-black rounded-2xl pl-5 pr-5 border-2 ml-4 mb-4" onClick={handleVideo}>
               Watch
             </button>
 }
@@ -59,6 +81,7 @@ export default function CarouselSpace() {
       CategoryWise[item] = List;
     });
   }
+//   console.log(value.data);
 
   
 

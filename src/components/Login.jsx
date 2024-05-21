@@ -30,7 +30,10 @@ export default  function Login(){
         console.log(data)
 
       if (data.status === "success") {
+        localStorage.setItem("user", data.token)
+        nav("/")
         alert("Login Successful");
+        
       } else {
         nav("/signup");
       }

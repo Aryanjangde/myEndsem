@@ -1,4 +1,4 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button"
 import { useContext } from "react";
 import { ApiContext } from "./contextFolder/Context";
@@ -7,6 +7,7 @@ import { ApiContext } from "./contextFolder/Context";
 
 export default function Navbar() {
     const isUser = useContext(ApiContext);
+    const nav = useNavigate();
   return (
     <div>
       <nav >
@@ -57,9 +58,14 @@ export default function Navbar() {
         </div>
         
         <div>
-        {isUser.isSignedIn}
-        <Button variant="outline" className="text-black mr-10" >Button</Button>
-
+        {localStorage.getItem("user") ? (<button className="text-black mr-10 bg-white rounded-xl p-3" onClick={()=>{
+          localStorage.removeItem("user");
+          nav("/login");
+        }}>Sign Out</button>) : (<button className="text-black mr-10 bg-white rounded-xl p-3" onClick={()=>{
+          nav("/login");
+        }
+        }>Log In</button>)}
+        
         
         </div>
         
