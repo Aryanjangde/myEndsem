@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { ApiContext } from "./contextFolder/Context";
 import { Carousel } from "primereact/carousel";
 import { useNavigate } from "react-router-dom";
+import VideoPlayer from "./VideoModal";
 
 function CardDashboard({ _id, thumbnail, keywords }) {
     const [isHovered, setIsHovered] = useState(false);
